@@ -1,41 +1,47 @@
 #Lord Hagen / olehag04@nfk.no
 
+#Continue even if errors accur.
 $ErrorActionPreference = "silentlycontinue"
+#This is required for system box message. That last line of code.
 Add-Type -AssemblyName PresentationFramework
 
+#If the proscess(es) are closed, remove the file.
 if ((Get-Process lync, outlook) -eq $null) 
 {
     Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost #-WhatIf
 }
 
+#If not, try to exit them. Then delete the file.
 else 
 {
-# Finn skype Prosess.
+# Find Skype process.
     $lync = Get-Process lync
     if ($lync) {
-# Prøv å avslutte.
+# Try to exit.
     $lync.CloseMainWindow()
-# Vent 5 sec.
+# Wait 5 seconds.
     Start-Sleep 5
-# Drep Prosessen.
+# If still running, kill the process.
     if (!$lync.HasExited) 
     {$lync | Stop-Process -Force}
 }
 Remove-Variable lync
 
-# Finn skype Prosess.
+# Find Outlook process.
     $outlook = Get-Process outlook
     if ($outlook) {
-# Prøv å avslutte.
+# Try to exit.
     $outlook.CloseMainWindow()
-# Vent 5 sec.
+# Wait 5 seconds.
     Start-Sleep 5
-# Drep Prosessen
+# If still running, kill the process.
     if (!$outlook.HasExited) 
     {$outlook | Stop-Process -Force}
 }
 Remove-Variable outlook
 
+#Uncommment '#-whatif' to test the script. Then the file will not be removed.
 Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost #-WhatIf
 }
-[System.Windows.MessageBox]::Show('Start Outlook på nytt!')
+
+[System.Windows.MessageBox]::Show('Restart Outlook!')
