@@ -1,6 +1,6 @@
 #Lord Hagen / olehag04@nfk.no
 
-#Continue even if errors accur.
+#Continue if errors occurs.
 $ErrorActionPreference = "silentlycontinue"
 #This is required for system box message. That last line of code.
 Add-Type -AssemblyName PresentationFramework
@@ -8,7 +8,7 @@ Add-Type -AssemblyName PresentationFramework
 #If the proscess(es) are closed, remove the file.
 if ((Get-Process lync, outlook) -eq $null) 
 {
-    Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost #-WhatIf
+    Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost
 }
 
 #If not, try to exit them. Then delete the file.
@@ -40,8 +40,7 @@ Remove-Variable lync
 }
 Remove-Variable outlook
 
-#Uncommment '#-whatif' to test the script. Then the file will not be removed.
-Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost #-WhatIf
+Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost
 }
 
 [System.Windows.MessageBox]::Show('Restart Outlook!')
