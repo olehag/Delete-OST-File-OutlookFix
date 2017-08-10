@@ -2,6 +2,7 @@
 
 #Continue if errors occurs.
 $ErrorActionPreference = "silentlycontinue"
+
 #This is required for system box message. That last line of code.
 Add-Type -AssemblyName PresentationFramework
 
@@ -43,4 +44,4 @@ Remove-Variable outlook
 Remove-Item $env\Users\$env:USERNAME\AppData\Local\Microsoft\outlook\*.ost
 }
 
-[System.Windows.MessageBox]::Show('Restart Outlook!')
+[System.Windows.MessageBox]::Show('Start Outlook!')
