@@ -1,5 +1,3 @@
-#Lord Hagen / olehag04@nfk.no
-
 #Continue if errors occurs.
 $ErrorActionPreference = "silentlycontinue"
 
